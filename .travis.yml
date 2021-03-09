@@ -1,0 +1,11 @@
+sudo: required
+services:
+	- docker
+
+before_install:
+	- docker build -t prinkovec/docker-react -f Dockerfile.dev .
+
+script:
+    # travis ce pokretati ove skripte i kad god od neke od njih dobije natrag
+    # status code koji je razlicit od 0, reci ce da je test failao
+    - docker run prinkovec/docker-react npm run test -- --coverage
